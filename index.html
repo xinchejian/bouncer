@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>XCJ sign-up page</title>
+ <script type="text/javascript" language="javascript"><!--
+function validateEmail(str) {
+        // atext=[a-zA-Z0-9!#$%&*+\-\/=?^_`{\|}~]
+        var emailRegEx = /^[a-zA-Z0-9+\-_]+(\.[a-zA-Z0-9+\-_]+)*@[a-zA-Z0-9+\-_]+(\.[a-zA-Z0-9+\-_]+)*\.[a-zA-Z]{2,6}$/;
+        return emailRegEx.test(str);
+}
+function validateForm() {
+        // check email address
+        var str = document.getElementById('email').value;
+        if (!validateEmail(str)) {
+                alert('Please enter a valid email address.');
+                document.getElementById('email').focus();
+                return false;
+        }
+        // success
+        //document.mailingListForm.submit();
+        document.getElementById('submit').disabled = true;
+        setTimeout(enableSubmit, 5000);
+        return true;
+}
+function enableSubmit() {
+        document.getElementById('submit').disabled = false;
+}
+//-->
+ </script>
+</head>
+<body>
+<form action="submit.php" method="POST" onsubmit="return validateForm();">
+<p>Name:
+<input id="email" type="text" name="email"/>
+</p>
+<p>Amount paid in cash:
+<select name="amount">
+<option value="100">100 RMB = 1 month</option>
+<option value="450">450 RMB = 6 months</option>
+</select>
+</p>
+<input type="submit"/>
+</form>
+</body>
+</html>
