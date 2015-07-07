@@ -28,13 +28,14 @@ function enableSubmit() {
 //-->
  </script>
 </head>
-<body>
+<body onload="document.getElementById('email').focus();">
 <form action="submit.php" method="POST" onsubmit="return validateForm();">
 <p>Name:
 <input id="email" type="email" name="email"/>
 </p>
 <p>Amount paid in cash:
 <select name="amount">
+<option value="0">-- Pick your membership --</option>
 <option value="100">100 RMB = 1 month</option>
 <option value="450">450 RMB = 6 months</option>
 </select>
