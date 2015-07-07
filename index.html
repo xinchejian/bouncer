@@ -16,8 +16,13 @@ function validateForm() {
                 document.getElementById('email').focus();
                 return false;
         }
+	str = document.getElementById('amount').value;
+	if (str == '0') {
+		alert('Please enter a valid amount.');
+		document.getElementById('amount').focus();
+		return false;
+	}
         // success
-        //document.mailingListForm.submit();
         document.getElementById('submit').disabled = true;
         setTimeout(enableSubmit, 5000);
         return true;
