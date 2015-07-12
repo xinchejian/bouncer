@@ -46,7 +46,7 @@ else
 	fclose($fp);
 
 	header('HTTP/1.1 303 See Other');
-	header("Location: /door.html");
+	header("Location: /");
 }
 mysql_close($link);
 unset($link);
