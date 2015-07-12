@@ -34,19 +34,19 @@ function enableSubmit() {
  </script>
 </head>
 <body onload="document.getElementById('email').focus();">
-<h1>Xinchejian Sign-up Page</h1>
+<h1>Xinchejian Sign-up Page ｜ 新车间会员费</h1>
 <form action="submit.php" method="POST" onsubmit="return validateForm();">
-<p>E-mail:
-<input id="email" type="email" name="email" required/>
-</p>
-<p>Amount paid in cash:
-<select name="amount" id="amount">
-<option value="0">-- Pick your membership --</option>
-<option value="100">100 RMB = 1 month</option>
-<option value="450">450 RMB = 6 months</option>
-</select>
-</p>
-<input type="submit"/>
+  <p>E-mail ｜ 邮件地址</p>
+  <input id="email" type="email" name="email" required/>
+  <p>Amount paid in cash ｜ 会员费</p>
+  <select name="amount" id="amount">
+    <option value="0">-- Pick membership period ｜ 选择时间段 --</option>
+    <option value="100">100 RMB = 1 month 1个月</option>
+    <option value="450">450 RMB = 6 months 6个月</option>
+  </select>
+  <p>
+    <input type="submit"/>
+  </p>
 </form>
 </body>
 </html>
