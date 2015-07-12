@@ -42,7 +42,8 @@ mysql_query("INSERT members.Payments (email, submitted, amount) VALUES($email2, 
 mysql_close($link);
 unset($link);
 
-$body = "Welcome!
+$subject = 'Welcome to Xinchejian 欢迎加入新车间';
+$body = "Welcome! 欢迎！
 
 You can now open the door by going to http://door.xinchejian.com/
 Username: $email
@@ -51,7 +52,7 @@ Password: $password
 Note that your access will be revoked if no payment was made.
 
 -- the script that sends out these emails";
-mailer($email, 'Welcome to Xinchejian', $body);
+mailer($email, $subject, $body);
 
 mailer('staff@xinchejian.com', "New member: $email, paid $amount for $months month(s).", '-- the script that sends out these emails');
 

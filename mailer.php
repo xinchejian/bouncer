@@ -8,8 +8,10 @@ $mail             = new PHPMailer();
 $mail->IsSMTP();
 $mail->SMTPAuth   = true;                  // enable SMTP authentication
 $mail->SMTPSecure = 'ssl';                 // sets the prefix to the servier
-$mail->Host       = 'smtp.sendgrid.com';      // sets GMAIL as the SMTP server
+$mail->CharSet    = 'UTF-8';
+$mail->Host       = 'smtp.sendgrid.com';   // sets GMAIL as the SMTP server
 $mail->Port       = 465;                   // set the SMTP port for the GMAIL server
+
 
 $mail->Username   = 'xinchejian';          // GMAIL/sendgrid username
 // add SetEnv SMTP_PASSWORD "blah" to this site's Apache conf
@@ -29,6 +31,6 @@ function mailer($mail_to, $subject, $body)
 	$mail->ClearAddresses();
 	$mail->AddAddress($mail_to);
 	$mail->Send()
-		or die("Asfd");
+		or die('Failed to send email');
 }
 
