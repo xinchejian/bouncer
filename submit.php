@@ -46,7 +46,7 @@ unset($link);
 $subject = 'Welcome to Xinchejian 欢迎加入新车间';
 $body = "Welcome! 欢迎！
 
-You can now open the door by going to http://door.xinchejian.com/
+You can now open the door by going to http://bouncer/
 Username: $email
 Password: $password
 
