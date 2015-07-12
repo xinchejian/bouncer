@@ -18,7 +18,7 @@ function validateForm() {
         }
 	str = document.getElementById('amount').value;
 	if (str == '0') {
-		alert('Please enter a valid amount.');
+		alert('Please pick a valid amount.');
 		document.getElementById('amount').focus();
 		return false;
 	}
@@ -34,12 +34,13 @@ function enableSubmit() {
  </script>
 </head>
 <body onload="document.getElementById('email').focus();">
+<h1>Xinchejian Sign-up Page</h1>
 <form action="submit.php" method="POST" onsubmit="return validateForm();">
 <p>E-mail:
-<input id="email" type="email" name="email"/>
+<input id="email" type="email" name="email" required/>
 </p>
 <p>Amount paid in cash:
-<select name="amount">
+<select name="amount" id="amount">
 <option value="0">-- Pick your membership --</option>
 <option value="100">100 RMB = 1 month</option>
 <option value="450">450 RMB = 6 months</option>
