@@ -48,8 +48,7 @@ $subject = 'Welcome to Xinchejian 欢迎加入新车间';
 $body = "Welcome! 欢迎！
 
 You can now open the door by going to http://bouncer/
-Username: $email
-Password: $password
+PIN: $password
 
 Note that your access will be revoked if no payment was made.
 

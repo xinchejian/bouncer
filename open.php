@@ -9,18 +9,13 @@ function mail_and_die($m)
 }
 
 $password = $_POST['password'];
-$email = trim($_POST['email']);
-
-$salt = 'salT';
-$passwordx = sprintf("%08x", crc32($salt.strtoupper($email)));
 
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
 	or mail_and_die('mysql_connect error');
-$email2 = '"'.mysql_real_escape_string($email, $link).'"';
 $password2 = '"'.mysql_real_escape_string($password, $link).'"';
 
-mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid AND email = $email2 AND password = $password2", $link)
+mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid AND password = $password2", $link)
 	or mail_and_die('mysql_query UPDATE error');
 if (mysql_affected_rows($link) != 1)
 {
@@ -37,7 +32,8 @@ else
 	$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
 
 	// Open a socket for the acknowledgement request
-	$fp = fsockopen('door.lan', 80, $errno, $errstr, 30);
+	$fp = fsockopen('10.0.10.10', 80, $errno, $errstr, 30)
+		or mail_and_die('fsockopen returned '.$errstr);
 
 	fputs($fp, $header . $req);
 	while (!feof($fp))

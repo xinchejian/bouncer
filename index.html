@@ -6,10 +6,9 @@
   <meta name='viewport' content='width=120'/>
   <link rel="stylesheet" type="text/css" href="bouncer.css">
 </head>
-<body onload='document.getElementById("email").focus()'>
+<body onload='document.getElementById("pin").focus()'>
   <form method='POST' action='/open.php'>
-    <p>Email:<input type='email' name='email' id='email' required /></p>
-    <p>Password:<input type='password' name='password' required /></p>
+    <p>PIN:<input type='number' id='pin' name='password' required /></p>
     <input type='submit' name='action' value='Open｜开门'/>
   </form>
   <span id="forkongithub"><a href="https://github.com/xinchejian/bouncer">Fork me on GitHub</a></span>

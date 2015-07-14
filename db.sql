@@ -8,13 +8,13 @@ CREATE TABLE `Payments` (
   `amount` int(11) NOT NULL,
   `verified` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_Payments_NAME` (`email`)
+  KEY `IDX_Payments_EMAIL` (`email`)
 );
 
 CREATE TABLE `Users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` char(64) NOT NULL,
-  `password` text NOT NULL,
+  `password` char(32) NOT NULL,
   `salt` char(32) NOT NULL,
   `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `paid_verified` date DEFAULT NULL,
@@ -22,6 +22,7 @@ CREATE TABLE `Users` (
   `since` date NOT NULL,
   `count` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `IDX_Users_NAME` (`email`)
+  UNIQUE KEY `IDX_Users_EMAIL` (`email`),
+  UNIQUE KEY `IDX_Users_PASSWORD` (`password`)
 );
 
