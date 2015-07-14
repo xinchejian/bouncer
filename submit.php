@@ -10,18 +10,19 @@ function mail_and_die($m)
 
 $amount = $_POST['amount'];
 $email = trim($_POST['email']);
+if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+	mail_and_die('invalid email');
 if ($amount == '100')
 	$months = 1;
 else if ($amount == '450')
 	$months = 6;
 else
 	mail_and_die('wrong amount');
-if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-	mail_and_die('invalid email');
 
-// TODO: if salt ever changes, make sure to only mail the password the first time
+// TODO: generate this salt
 $salt = 'salT';
-$password = sprintf("%08x", crc32($salt.strtoupper($email)));
+// Friendlier pincode instead of password
+$password = sprintf("%06u", crc32($salt.strtoupper($email))%1000000);
 
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
@@ -36,7 +37,7 @@ mysql_query("INSERT members.Payments (email, submitted, amount) VALUES($email2, 
 	or mail_and_die('mysql_query INSERT Payments error');
 
 // Give new members the benefit of the doubt (trust, but verify):
-mysql_query("UPDATE members.Users SET paid = IF(CURDATE()<paid,paid,CURDATE()) + INTERVAL $months MONTH WHERE email = $email2", $link)
+mysql_query("UPDATE members.Users SET paid = IF(CURDATE()<paid,paid,CURDATE()) + INTERVAL $months MONTH, salt = $salt2, password = $password2 WHERE email = $email2", $link)
 	or mail_and_die('mysql_query UPDATE error');
 if (mysql_affected_rows($link) != 1)
 	mail_and_die('mysql_affected_rows error');
