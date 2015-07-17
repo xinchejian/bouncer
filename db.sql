@@ -1,5 +1,5 @@
-CREATE DATABASE 'members';
-USE 'members';
+CREATE DATABASE `members`;
+USE `members`;
 
 CREATE TABLE `Payments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
