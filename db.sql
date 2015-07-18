@@ -21,8 +21,10 @@ CREATE TABLE `Users` (
   `paid` date DEFAULT NULL,
   `since` date NOT NULL,
   `count` int(11) NOT NULL DEFAULT '0',
+  `mac` char(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_Users_EMAIL` (`email`),
   UNIQUE KEY `IDX_Users_PASSWORD` (`password`)
+  UNIQUE KEY `IDX_Users_MAC` (`mac`)
 );
 
