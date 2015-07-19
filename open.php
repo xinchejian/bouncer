@@ -13,9 +13,24 @@ $password = $_POST['password'];
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
 	or mail_and_die('mysql_connect error');
+
 $password2 = '"'.mysql_real_escape_string($password, $link).'"';
 
-mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid AND password = $password2", $link)
+// Register MAC address
+$ipAddress = '('.$_SERVER['REMOTE_ADDR'].')';
+$mac2 = '';
+exec('arp -na', $lines);
+foreach($lines as $line)
+{
+   $cols=preg_split('/\s+/', trim($line));
+   if ($cols[1]==$ipAddress)
+   {
+	$mac2 = ', mac = "'.mysql_real_escape_string($cols[3], $link).'"';
+	break;
+   }
+}
+
+mysql_query('UPDATE members.Users SET count = count + 1'.$mac2." WHERE CURDATE() <= paid AND password = $password2", $link)
 	or mail_and_die('mysql_query UPDATE error');
 if (mysql_affected_rows($link) != 1)
 {
