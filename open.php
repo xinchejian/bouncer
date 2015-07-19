@@ -1,7 +1,6 @@
 <?php
 require('mailer.php');
 
-
 function mail_and_die($m)
 {
   mailer('it@xinchejian.com', 'Error in '.__FILE__, $m);
@@ -19,7 +18,8 @@ $password2 = '"'.mysql_real_escape_string($password, $link).'"';
 // Register MAC address
 $ipAddress = '('.$_SERVER['REMOTE_ADDR'].')';
 $mac2 = '';
-exec('arp -na', $lines);
+// Remember to: chmod +s /usr/sbin/arp
+exec('/usr/sbin/arp -na', $lines);
 foreach($lines as $line)
 {
    $cols=preg_split('/\s+/', trim($line));
@@ -35,6 +35,7 @@ mysql_query('UPDATE members.Users SET count = count + 1'.$mac2." WHERE CURDATE()
 if (mysql_affected_rows($link) != 1)
 {
 	header('HTTP/1.1 403 Forbidden');
+	print("Access denied");
 }
 else
 {
