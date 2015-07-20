@@ -32,6 +32,7 @@ foreach($lines as $line)
 
 mysql_query('UPDATE members.Users SET count = count + 1'.$mac2." WHERE CURDATE() <= paid AND password = $password2", $link)
 	or mail_and_die('mysql_query UPDATE error');
+
 if (mysql_affected_rows($link) != 1)
 {
 	header('HTTP/1.1 403 Forbidden');

@@ -3,7 +3,7 @@
 <head>
   <title>XCJ payment verification</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name='viewport' content='width=120'/>
+  <meta name='viewport' content='width=320'/>
   <script type="text/javascript" language="javascript"><!--
 function verify(e, ok, id, email) {
   var xhr = new XMLHttpRequest();
