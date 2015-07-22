@@ -7,21 +7,28 @@
   <link rel="stylesheet" type="text/css" href="bouncer.css">
 </head>
 <body onload='document.getElementById("pin").focus()'>
-  <p>XinCheJian is the first Hackersapce in China. Xinchejian is the first hackerspace in China. It is a non-profit organization run by volunteers. Xinchejian’s mission is to support and promote physical computing, open source hardware, and the Internet of Things.
-  中国第一个创客空间，也是一个非盈利创客空间，在中国各地传播创客空间的理念以及推广创客文化。大家可以与团队协作捣鼓新技术。新车间会积极举办讲座、项目、工坊、竞赛等。
+  <h1>Xinchejian 新车间</h1>
+  <form method='POST' action='/open.php'>
+    <p>PIN: <input placeholder="PIN" type='password' id='pin' name='password' required />
+    <input type='submit' name='action' value='Open 开门'/>
+    </p>
+  </form>
+  <p>Xinchejian is the first hackerspace in China. Xinchejian is the first hackerspace in China. It is a non-profit organization run by volunteers. Xinchejian’s mission is to support and promote physical computing, open source hardware, and the Internet of Things.</p>
+  <p>中国第一个创客空间，也是一个非盈利创客空间，在中国各地传播创客空间的理念以及推广创客文化。大家可以与团队协作捣鼓新技术。新车间会积极举办讲座、项目、工坊、竞赛等。</p>
+  <p>
+  Please follow us on our social media: Xinchejian Wechat: <b>xinchejian</b>.
+  <br/>
+  请关注新车间的社交媒体平台：新车间微信公众号: <b>xinchejian</b>。
   </p>
   <p>
-  Please follow us on our social media: XinCheJian Wechat: xinchejian.
-  请关注新车间的社交媒体平台：新车间微信公众号: xinchejian。
-  </p>
   <a href="http://xinchejian.com">XinCheJian Website 新车间网站</a>
-  <a href="http://http://www.meetup.com/xinchejian-meetup/">XinCheJian Meetup 新车间英文活动平台</a>
-  <a href="http://xinchejian.huodongxing.com">XinCheJian Event Platform 新车间中文活动平台</a>
+  <br/>
+  <a href="http://www.meetup.com/xinchejian-meetup/">XinCheJian Meetup 新车间英文活动平台</a>
+  <br/>
+  <a href="http://xinchejian.huodongxing.com">XinCheJian Events 新车间中文活动平台</a>
+  <br/>
+  <a href="mailto:info@xinchejian.com">Send us mail 给我们发邮件</a>
   </p>
-  <form method='POST' action='/open.php'>
-    <p>PIN:<input type='password' id='pin' name='password' required /></p>
-    <input type='submit' name='action' value='Open｜开门'/>
-  </form>
   <span id="forkongithub"><a href="https://github.com/xinchejian/bouncer">Fork me on GitHub</a></span>
 </body>
 </html>
