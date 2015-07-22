@@ -24,7 +24,7 @@ CREATE TABLE `Users` (
   `mac` char(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_Users_EMAIL` (`email`),
-  UNIQUE KEY `IDX_Users_PASSWORD` (`password`)
+  UNIQUE KEY `IDX_Users_PASSWORD` (`password`),
   UNIQUE KEY `IDX_Users_MAC` (`mac`)
 );
 
