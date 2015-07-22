@@ -19,21 +19,6 @@ else if ($amount == '450')
 else
 	mail_and_die('wrong amount');
 
-$ipAddress=$_SERVER['REMOTE_ADDR'];
-$macAddr=false;
-
-#run the external command, break output into lines
-exec('arp -na', $lines);
-#look for the output line describing our IP address
-foreach($lines as $line)
-{
-   $cols=preg_split('/\s+/', trim($line));
-   if ($cols[1]=='('.$ipAddress.')')
-   {
-       $macAddr=$cols[3];
-   }
-}
-
 // TODO: generate this salt
 $salt = 'salT';
 // Friendlier pincode instead of password
