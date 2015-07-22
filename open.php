@@ -59,7 +59,7 @@ else
 	fclose($fp);
 
 	header('HTTP/1.1 303 See Other');
-	header("Location: /");
+	header("Location: /welcomeback.html");
 }
 mysql_close($link);
 unset($link);
