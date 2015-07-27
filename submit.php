@@ -8,6 +8,13 @@ function mail_and_die($m)
   die($m);
 }
 
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+	header('HTTP/1.1 303 See Other');
+	header('Location: /submit.html');
+	die('must be POST');
+}
+
+
 $amount = $_POST['amount'];
 $email = trim($_POST['email']);
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -16,6 +23,10 @@ if ($amount == '100')
 	$months = 1;
 else if ($amount == '450')
 	$months = 6;
+else if ($amount == '900')
+	$months = 12;
+else if ($amount == '5000')
+	$months = 12;
 else
 	mail_and_die('wrong amount');
 
@@ -63,5 +74,5 @@ mailer($email, $subject, $body);
 mailer('staff@xinchejian.com', "New member: $email, paid $amount for $months month(s).", '-- the script that sends out these emails');
 
 header('HTTP/1.1 303 See Other');
-header("Location: /welcome.html");
+header('Location: /welcome.html');
 
