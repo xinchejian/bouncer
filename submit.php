@@ -76,7 +76,7 @@ if ($isnew)
 	$neworold = "New";
 else
 	$neworold = "Old";
-mailer('staff@xinchejian.com', "$neworold member: $email, paid $amount for $months month(s).", '-- '.__FILE__);
+mailer('finances@xinchejian.com', "$neworold member: $email, paid $amount for $months month(s).", '-- '.__FILE__);
 
 header('HTTP/1.1 303 See Other');
 header('Location: /welcome.html');
