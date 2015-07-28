@@ -25,7 +25,8 @@ foreach($lines as $line)
    $cols=preg_split('/\s+/', trim($line));
    if ($cols[1]==$ipAddress)
    {
-	$mac2 = ', mac = "'.mysql_real_escape_string($cols[3], $link).'"';
+	$mac = $cols[3];
+	$mac2 = ', mac = "'.mysql_real_escape_string($mac, $link).'"';
 	break;
    }
 }
@@ -60,6 +61,8 @@ else
 
 	header('HTTP/1.1 303 See Other');
 	header("Location: /welcomeback.html");
+
+	exec('/usr/bin/ssh -i /var/rpc_id_rsa root@10.0.10.5 ./add_mac.sh '.$mac);
 }
 mysql_close($link);
 unset($link);
