@@ -26,7 +26,7 @@ foreach($lines as $line)
    if ($cols[1]==$ipAddress)
    {
 	$mac = $cols[3];
-	$mac2 = ', mac = "'.mysql_real_escape_string($mac, $link).'"';
+	$mac2 = ', mac = SHA1(CONCAT("salT","'.mysql_real_escape_string($mac, $link).'"))';
 	break;
    }
 }

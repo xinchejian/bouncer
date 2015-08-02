@@ -26,7 +26,7 @@ foreach($lines as $line)
    }
 }
 
-mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid AND mac = $mac2", $link)
+mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid AND mac = SHA1(CONCAT('salT',$mac2))", $link)
 	or mail_and_die('mysql_query UPDATE error');
 
 if (mysql_affected_rows($link) == 1)
