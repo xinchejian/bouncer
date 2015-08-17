@@ -4,7 +4,7 @@ USE `members`;
 CREATE TABLE `Payments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` char(64) NOT NULL,
-  `submitted` date NOT NULL,
+  `submitted` datetime NOT NULL,
   `amount` int(11) NOT NULL,
   `verified` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
