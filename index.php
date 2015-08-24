@@ -12,20 +12,12 @@ function mail_and_die($m)
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
 	or mail_and_die('mysql_connect error');
 
-// Register MAC address
-$ipAddress = '('.$_SERVER['REMOTE_ADDR'].')';
-$mac2 = '"whatever"';
-// Remember to: chmod +s /usr/sbin/arp
-exec('/usr/sbin/arp -na', $lines);
-foreach($lines as $line)
-{
-   $cols=preg_split('/\s+/', trim($line));
-   if ($cols[1]==$ipAddress)
-   {
-	$mac2 = '"'.mysql_real_escape_string($cols[3], $link).'"';
-	break;
-   }
-}
+// Find known MAC address
+$mac = find_mac();
+if ($mac)
+	$mac2 = '"'.mysql_real_escape_string($mac, $link).'"';
+else
+	$mac2 = '"whatever"';
 
 mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid AND mac = SHA1(CONCAT('salT',$mac2))", $link)
 	or mail_and_die('mysql_query UPDATE error');

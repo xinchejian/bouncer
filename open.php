@@ -17,20 +17,11 @@ $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
 $password2 = '"'.mysql_real_escape_string($password, $link).'"';
 
 // Register MAC address
-$ipAddress = '('.$_SERVER['REMOTE_ADDR'].')';
-$mac2 = '';
-// Remember to: chmod +s /usr/sbin/arp
-exec('/usr/sbin/arp -na', $lines);
-foreach($lines as $line)
-{
-   $cols=preg_split('/\s+/', trim($line));
-   if ($cols[1]==$ipAddress)
-   {
-	$mac = $cols[3];
+$mac = find_mac();
+if ($mac)
 	$mac2 = ', mac = SHA1(CONCAT("salT","'.mysql_real_escape_string($mac, $link).'"))';
-	break;
-   }
-}
+else
+	$mac2 = '';
 
 mysql_query('UPDATE members.Users SET count = count + 1'.$mac2." WHERE CURDATE() <= paid AND password = $password2", $link)
 	or mail_and_die('mysql_query UPDATE error');
