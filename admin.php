@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('inc/common.php');?><!DOCTYPE html>
 <html>
 <head>
   <title>XCJ payment verification</title>

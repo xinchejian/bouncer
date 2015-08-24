@@ -1,4 +1,5 @@
 <?php
+require('inc/common.php');
 require('mailer.php');
 
 function mail_and_die($m)

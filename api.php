@@ -1,4 +1,5 @@
 <?php
+require('inc/common.php');
 
 $password = $_GET['password'];
 $email = trim($_GET['email']);

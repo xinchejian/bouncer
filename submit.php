@@ -1,4 +1,5 @@
 <?php
+require('inc/common.php');
 require_once('mailer.php');
 
 
