@@ -4,7 +4,7 @@ This password can be used to open the door. Once you open the door, your device 
 
 ## Structure
 There are three entry points:
-* `index.php` opens the door (if the MAC is known) or redirects to `index.html` for PIN and finally `welcomeback.html`
+* `index.php` opens the door if the MAC is known, else redirects to `index.html` for PIN, which POSTs to `open.php` and redirects to `welcomeback.html`
 * `submit.html` for submitting a new payment, POSTs to `submit.php` and finally redirects to `welcome.html`
 * `admin.php` for payment verification; calls `verify.php` using XHR
 
