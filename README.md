@@ -4,8 +4,8 @@ This password can be used to open the door. Once you open the door, your device 
 
 ## Structure
 There are three entry points:
-* `index.php` opens the door (if the MAC is known) or redirects to `index.html` for PIN, finally `welcomeback.html`
-* `submit.html` for submitting a new payment, redirects to `submit.php` and finally `welcome.html`
+* `index.php` opens the door (if the MAC is known) or redirects to `index.html` for PIN and finally `welcomeback.html`
+* `submit.html` for submitting a new payment, POSTs to `submit.php` and finally redirects to `welcome.html`
 * `admin.php` for payment verification; calls `verify.php` using XHR
 
 ### The system's workflow
@@ -18,5 +18,7 @@ There are three entry points:
 The MySQL DB schema create script can be found in `db.sql`.
 
 ## To-Do
-* Cronjob for membership reminders DONE
+* Cronjob for membership reminders DONE: `checkpaid.php`
+* Need "Access denied" page
+* Cronjob for DB backups
 
