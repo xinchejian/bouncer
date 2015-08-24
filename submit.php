@@ -1,6 +1,6 @@
 <?php
 require('inc/common.php');
-require_once('mailer.php');
+require('inc/mailer.php');
 
 
 function mail_and_die($m)
