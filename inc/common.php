@@ -13,7 +13,7 @@ function find_mac()
 	   $cols = preg_split('/\s+/', trim($line));
 	   if ($cols[1] == $ipAddress)
 	   {
-		return $cols[3];
+		return strtolower($cols[3]);
 	   }
 	}
 	return null;
