@@ -1,6 +1,6 @@
 <?php
 
-require_once("libphp-phpmailer/class.phpmailer.php");
+require_once("PHPMailer/PHPMailerAutoload.php");
 //include("class.smtp.php"); // optional, gets called from within class.phpmailer.php if not already loaded
 
 $mail             = new PHPMailer();
