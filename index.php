@@ -27,7 +27,6 @@ if (mysql_affected_rows($link) == 1)
 	// TEMP: use md5sum over Date, random salt and shared secret
 	$req = "pin=0326&action=open";
 
-	header('HTTP/1.1 200 OK');
 	$header  = "POST / HTTP/1.1\r\n";      // HTTP POST request
 	$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
 	$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
