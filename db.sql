@@ -1,18 +1,17 @@
 CREATE DATABASE `members`;
 USE `members`;
 
-CREATE TABLE `Payments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `members`.`Payments` (
+  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   `email` char(64) NOT NULL,
   `submitted` datetime NOT NULL,
   `amount` int(11) NOT NULL,
-  `verified` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_Payments_EMAIL` (`email`)
+  `verified` tinyint(1) DEFAULT NULL
 );
+CREATE INDEX `IDX_Payments_EMAIL` ON `Payments`(`email`);
 
 CREATE TABLE `Users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   `email` char(64) NOT NULL,
   `password` char(32) NULL,
   `salt` char(32) NULL,
@@ -20,11 +19,9 @@ CREATE TABLE `Users` (
   `paid_verified` date DEFAULT NULL,
   `paid` date DEFAULT NULL,
   `since` date NOT NULL,
-  `count` int(11) NOT NULL DEFAULT '0',
-  `mac` char(40) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `IDX_Users_EMAIL` (`email`),
-  UNIQUE KEY `IDX_Users_PASSWORD` (`password`),
-  UNIQUE KEY `IDX_Users_MAC` (`mac`)
+  `count` int(11) NOT NULL DEFAULT 0,
+  `mac` char(40) DEFAULT NULL
 );
-
+CREATE UNIQUE INDEX `IDX_Users_EMAIL` ON `Users`(`email`);
+CREATE UNIQUE INDEX `IDX_Users_PASSWORD` ON `Users`(`password`);
+CREATE UNIQUE INDEX `IDX_Users_MAC` ON `Users`(`mac`);
