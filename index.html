@@ -1,39 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>XCJ Door</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name='viewport' content='width=320'/>
-  <link rel="stylesheet" type="text/css" href="bouncer.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>XCJ Door</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/bouncer.css">
 </head>
 <body onload='document.getElementById("pin").focus()'>
-  <h1>Xinchejian 新车间</h1>
-  <form method='POST' action='/open.php'>
-    <p>PIN: <input placeholder="PIN" type='password' id='pin' name='password' required />
-    <input type='submit' name='action' value='Open 开门'/>
-    </p>
-  </form>
-  <p>Xinchejian is the first hackerspace in China. It is a non-profit organization run by volunteers. Xinchejian’s mission is to support and promote physical computing, open source hardware, and the Internet of Things.</p>
-  <p>中国第一个创客空间，也是一个非盈利创客空间，在中国各地传播创客空间的理念以及推广创客文化。大家可以与团队协作捣鼓新技术。新车间会积极举办讲座、项目、工坊、竞赛等。</p>
-  <p>
-  Non-members can visit our open night on Wednesday's 7pm.
-  <br/>
-  非会员请在每周三晚上7点开放夜来新车间参观了解。
-  </p> 
-  <p>
-  Please follow us on our social media: Xinchejian Wechat: <b>xinchejian</b>.
-  <br/>
-  请关注新车间的社交媒体平台：新车间微信公众号: <b>xinchejian</b>。
-  </p>
-  <p>
-  <a href="http://xinchejian.com">XinCheJian Website 新车间网站</a>
-  <br/>
-  <a href="http://www.meetup.com/xinchejian-meetup/">XinCheJian Meetup 新车间英文活动平台</a>
-  <br/>
-  <a href="http://xinchejian.huodongxing.com">XinCheJian Events 新车间中文活动平台</a>
-  <br/>
-  <a href="mailto:info@xinchejian.com">Send us mail 给我们发邮件</a>
-  </p>
-  <span id="forkongithub"><a href="https://github.com/xinchejian/bouncer">Fork me on GitHub</a></span>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-6">
+				<h1>Xinchejian 新车间</h1>
+			</div>
+
+			<div class="col-lg-6">
+				<div id="pinbar">
+					<form method='POST' action='/open.php'>
+						<div class="input-group">
+							<span class="input-group-addon">
+								PIN:
+							</span>
+							<input id="pin" type="password" class="form-control" placeholder="PIN" name="password" required />
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit" name="action" value="Open 开门">
+								Open 开门
+								</button>
+							</span>
+						</div><!-- /input-group -->
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="well">
+					<p>Xinchejian is the first hackerspace in China. It is a non-profit organization run by volunteers. Xinchejian’s mission is to support and promote physical computing, open source hardware, and the Internet of Things.</p>
+					<p>中国第一个创客空间，也是一个非盈利创客空间，在中国各地传播创客空间的理念以及推广创客文化。大家可以与团队协作捣鼓新技术。新车间会积极举办讲座、项目、工坊、竞赛等。</p>
+					<p>
+					Non-members can visit our open night on Wednesday's 7pm.
+					<br/>
+					非会员请在每周三晚上7点开放夜来新车间参观了解。
+					</p>
+					<p>
+					Please follow us on our social media: Xinchejian Wechat: <b>xinchejian</b>.
+					<br/>
+					请关注新车间的社交媒体平台：新车间微信公众号: <b>xinchejian</b>。
+					</p>
+					<p>
+					<a href="http://xinchejian.com">XinCheJian Website 新车间网站</a>
+					<br/>
+					<a href="http://www.meetup.com/xinchejian-meetup/">XinCheJian Meetup 新车间英文活动平台</a>
+					<br/>
+					<a href="http://xinchejian.huodongxing.com">XinCheJian Events 新车间中文活动平台</a>
+					<br/>
+					<a href="mailto:info@xinchejian.com">Send us mail 给我们发邮件</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<span id="forkongithub"><a href="https://github.com/xinchejian/bouncer">Fork me on GitHub</a></span>
+
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
