@@ -24,25 +24,7 @@ mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid 
 
 if (mysql_affected_rows($link) == 1)
 {
-	// TEMP: use md5sum over Date, random salt and shared secret
-	$req = "pin=0326&action=open";
-
-	$header  = "POST / HTTP/1.1\r\n";      // HTTP POST request
-	$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-	$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-
-	// Open a socket for the acknowledgement request
-	$fp = fsockopen('10.0.10.10', 80, $errno, $errstr, 30)
-		or mail_and_die('fsockopen returned '.$errstr);
-
-	fputs($fp, $header . $req);
-	while (!feof($fp))
-		$res = fgets ($fp, 1024); 
-
-	fclose($fp);
-
-	header('HTTP/1.1 303 See Other');
-	header("Location: /welcomeback.html");
+	door_open();
 }
 else {
 	header('HTTP/1.1 303 See Other');

@@ -33,34 +33,7 @@ if (mysql_affected_rows($link) != 1)
 }
 else
 {
-	// TEMP: use md5sum over Date, random salt and shared secret
-	$req = "pin=0326&action=open";
-
-	$header  = "POST / HTTP/1.1\r\n";      // HTTP POST request
-	$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-	$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-
-	// Open a socket for the acknowledgement request
-	$fp = fsockopen('10.0.10.10', 80, $errno, $errstr, 30);
-        if ($fp)
-        {
-	        fputs($fp, $header . $req);
-        	while (!feof($fp))
-	        	$res = fgets ($fp, 1024);
-        	fclose($fp);
-
-        	header('HTTP/1.1 303 See Other');
-	        header("Location: /welcomeback.html");
-
-        	exec('/usr/bin/ssh -i /var/rpc_id_rsa root@10.0.10.5 ./add_mac.sh '.$mac);
-        }
-        else
-        {
-                $fperr = $errstr;
-        	header('HTTP/1.1 303 See Other');
-	        header("Location: /dooroffline.html");
-		mail_and_die('fsockopen returned: '.$fperr);
-        }
+	door_open();
 }
 mysql_close($link);
 unset($link);
