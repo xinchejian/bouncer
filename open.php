@@ -41,19 +41,26 @@ else
 	$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
 
 	// Open a socket for the acknowledgement request
-	$fp = fsockopen('10.0.10.10', 80, $errno, $errstr, 30)
-		or mail_and_die('fsockopen returned '.$errstr);
+	$fp = fsockopen('10.0.10.10', 80, $errno, $errstr, 30);
+        if ($fp)
+        {
+	        fputs($fp, $header . $req);
+        	while (!feof($fp))
+	        	$res = fgets ($fp, 1024);
+        	fclose($fp);
 
-	fputs($fp, $header . $req);
-	while (!feof($fp))
-		$res = fgets ($fp, 1024); 
+        	header('HTTP/1.1 303 See Other');
+	        header("Location: /welcomeback.html");
 
-	fclose($fp);
-
-	header('HTTP/1.1 303 See Other');
-	header("Location: /welcomeback.html");
-
-	exec('/usr/bin/ssh -i /var/rpc_id_rsa root@10.0.10.5 ./add_mac.sh '.$mac);
+        	exec('/usr/bin/ssh -i /var/rpc_id_rsa root@10.0.10.5 ./add_mac.sh '.$mac);
+        }
+        else
+        {
+                $fperr = $errstr;
+        	header('HTTP/1.1 303 See Other');
+	        header("Location: /dooroffline.html");
+		mail_and_die('fsockopen returned: '.$fperr);
+        }
 }
 mysql_close($link);
 unset($link);
