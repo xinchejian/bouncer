@@ -33,7 +33,7 @@ if (mysql_affected_rows($link) != 1)
 }
 else
 {
-	door_open();
+	open_door();
 }
 mysql_close($link);
 unset($link);

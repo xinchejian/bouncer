@@ -24,7 +24,7 @@ mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid 
 
 if (mysql_affected_rows($link) == 1)
 {
-	door_open();
+	open_door();
 }
 else {
 	header('HTTP/1.1 303 See Other');
