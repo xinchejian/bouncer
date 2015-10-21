@@ -19,6 +19,7 @@ The MySQL DB schema create script can be found in `db.sql`.
 
 ## To-Do
 * Cronjob for membership reminders DONE: `checkpaid.php`
-* Need "Access denied" page
+* Need "Access denied" page DONE: `accessdenied.html`
 * Cronjob for DB backups
+* Push-to-deploy DONE: see comment in https://github.com/xinchejian/bouncer/issues/37
 
