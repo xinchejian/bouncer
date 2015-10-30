@@ -32,10 +32,7 @@ function verify(e, ok, id, email) {
   </thead>
   <tbody><?php
 require 'inc/mailer.php';
-
-// add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
-$link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error', __FILE__);
+require 'inc/db.php';
 
 $result = mysql_query("SELECT id,email,CAST(submitted AS DATE) as submitted,amount FROM members.Payments WHERE verified IS NULL;", $link)
 	or mail_and_die('mysql_query SELECT error', __FILE__);

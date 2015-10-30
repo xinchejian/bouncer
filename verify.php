@@ -1,14 +1,11 @@
 <?php
 require 'inc/common.php';
 require 'inc/mailer.php';
+require 'inc/db.php';
 
 $paymentid = (int)$_GET['id'];
 $ok = (int)$_GET['ok'];
 $email = urldecode($_GET['email']);
-
-// add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
-$link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error', __FILE__);
 
 $email2 = '"'.mysql_real_escape_string($email, $link).'"';
 

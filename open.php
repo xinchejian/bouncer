@@ -1,14 +1,10 @@
 <?php
 require 'inc/common.php';
 require 'inc/mailer.php';
+require 'inc/db.php';
 
 
 $password = $_POST['password'];
-
-// add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
-$link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error', __FILE__);
-
 $password2 = '"'.mysql_real_escape_string($password, $link).'"';
 
 // Register MAC address

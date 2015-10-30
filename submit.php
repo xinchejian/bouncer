@@ -30,9 +30,8 @@ $salt = 'salT';
 $crc = crc32($salt.strtoupper($email)) & 0x7FFFFFFF;//remove sign
 $password = sprintf("%06u", $crc % 1000000);
 
-// add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
-$link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error', __FILE__);
+require 'inc/db.php';
+
 $email2 = '"'.mysql_real_escape_string($email, $link).'"';
 $amount2 = '"'.mysql_real_escape_string($amount, $link).'"';
 $password2 = '"'.mysql_real_escape_string($password, $link).'"';

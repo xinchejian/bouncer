@@ -3,6 +3,7 @@
 // 0 6 * * * /usr/bin/curl http://localhost/checkpaid.php
 
 require 'inc/mailer.php';
+require 'inc/db.php';
 
 
 $subject = 'Xinchejian membership reminder 新车间会员资格到期提醒';
@@ -20,10 +21,6 @@ Thanks for your continuous support!
 谢谢您一如既往的支持！
 
 -- the script that sends out these emails';
-
-// add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
-$link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error', __FILE__);
 
 $result = mysql_query('SELECT email FROM members.Users WHERE paid = CURDATE() OR paid_verified = CURDATE()', $link)
 	or die('mysql_query SELECT error');
