@@ -22,7 +22,7 @@ Thanks for your continuous support!
 
 -- the script that sends out these emails';
 
-$result = $link->query('SELECT email FROM Users WHERE paid = CURDATE() OR paid_verified = CURDATE()')
+$result = $link->query('SELECT email FROM Users WHERE paid = DATE('now') OR paid_verified = DATE('now')')
 	or die('link->query SELECT error');
 
 while ($row = $result->fetchArray()) {
