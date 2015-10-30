@@ -31,7 +31,7 @@ function verify(e, ok, id, email) {
    </tr>
   </thead>
   <tbody><?php
-require 'inc/common.php';
+require 'inc/mailer.php';
 
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
