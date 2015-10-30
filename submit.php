@@ -37,16 +37,16 @@ $amount2 = '"'.$link->escapeString($amount).'"';
 $password2 = '"'.$link->escapeString($password).'"';
 $salt2 = '"'.$link->escapeString($salt).'"';
 
-$link->exec("INSERT IGNORE members.Users (email,since) VALUES($email2,NOW())")
+$link->exec("INSERT IGNORE Users (email,since) VALUES($email2,NOW())")
 	or mail_and_die('link->exec INSERT Users error', __FILE__);
 $isnew = $link->changes() == 1;
 
-$link->exec("INSERT members.Payments (email, submitted, amount) VALUES($email2, NOW(), $amount2)")
+$link->exec("INSERT Payments (email, submitted, amount) VALUES($email2, NOW(), $amount2)")
 	or mail_and_die('link->exec INSERT Payments error', __FILE__);
 
 // Give new members the benefit of the doubt (trust, but verify):
 // FIXME: might fail because of unique password (change salt)
-$link->exec("UPDATE members.Users SET paid = IF(CURDATE()<paid,paid,CURDATE()) + INTERVAL $months MONTH, salt = $salt2, password = $password2 WHERE email = $email2")
+$link->exec("UPDATE Users SET paid = IF(CURDATE()<paid,paid,CURDATE()) + INTERVAL $months MONTH, salt = $salt2, password = $password2 WHERE email = $email2")
 	or mail_and_die('link->exec UPDATE error', __FILE__);
 if ($link->changes() != 1)
 	mail_and_die('link->changes should be 1', __FILE__);

@@ -9,7 +9,7 @@ $email = urldecode($_GET['email']);
 
 $email2 = '"'.$link->escapeString($email).'"';
 
-$result = $link->exec("SELECT email,amount FROM members.Payments WHERE id = $paymentid;")
+$result = $link->exec("SELECT email,amount FROM Payments WHERE id = $paymentid;")
 	or die('link->exec SELECT error');
 
 if ($row = mysql_fetch_assoc($result))
@@ -25,15 +25,15 @@ else if ($amount == '5000')
 else
 	mail_and_die('wrong amount', __FILE__);
 
-$link->exec("UPDATE members.Payments SET verified = $ok WHERE id = $paymentid")
+$link->exec("UPDATE Payments SET verified = $ok WHERE id = $paymentid")
 	or mail_and_die('link->exec UPDATE Payments error', __FILE__);
 
 if ($ok) {
-	$link->exec("UPDATE members.Users SET paid_verified = (SELECT submitted FROM members.Payments WHERE id = $paymentid) + INTERNAL $months MONTH WHERE email = $email2")
+	$link->exec("UPDATE Users SET paid_verified = (SELECT submitted FROM Payments WHERE id = $paymentid) + INTERNAL $months MONTH WHERE email = $email2")
 		or mail_and_die('link->exec UPDATE Users error', __FILE__);
 }
 else {
-	$link->exec("UPDATE members.Users SET paid = paid - INTERVAL $months MONTH WHERE email = $email2")
+	$link->exec("UPDATE Users SET paid = paid - INTERVAL $months MONTH WHERE email = $email2")
 		or mail_and_die('link->exec UPDATE Users error', __FILE__);
 	//mailer($email, $subject, $body);
 }

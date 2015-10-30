@@ -22,7 +22,7 @@ Thanks for your continuous support!
 
 -- the script that sends out these emails';
 
-$result = $link->exec('SELECT email FROM members.Users WHERE paid = CURDATE() OR paid_verified = CURDATE()')
+$result = $link->exec('SELECT email FROM Users WHERE paid = CURDATE() OR paid_verified = CURDATE()')
 	or die('link->exec SELECT error');
 
 while ($row = mysql_fetch_assoc($result)) {
