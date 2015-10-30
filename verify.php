@@ -9,10 +9,10 @@ $email = urldecode($_GET['email']);
 
 $email2 = '"'.$link->escapeString($email).'"';
 
-$result = $link->exec("SELECT email,amount FROM Payments WHERE id = $paymentid;")
-	or die('link->exec SELECT error');
+$result = $link->query("SELECT email,amount FROM Payments WHERE id = $paymentid;")
+	or die('link->query SELECT error');
 
-if ($row = mysql_fetch_assoc($result))
+if ($row = $result->fetchArray())
 	$amount = $row['amount'];
 if ($amount == '100')
 	$months = 1;
