@@ -6,15 +6,9 @@ $paymentid = (int)$_GET['id'];
 $ok = (int)$_GET['ok'];
 $email = urldecode($_GET['email']);
 
-function mail_and_die($m)
-{
-  mailer('it@xinchejian.com', 'Error in '.__FILE__, $m);
-  die($m);
-}
-
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error');
+	or mail_and_die('mysql_connect error', __FILE__);
 
 $email2 = '"'.mysql_real_escape_string($email, $link).'"';
 
@@ -32,18 +26,18 @@ else if ($amount == '900')
 else if ($amount == '5000')
 	$months = 12;
 else
-	mail_and_die('wrong amount');
+	mail_and_die('wrong amount', __FILE__);
 
 mysql_query("UPDATE members.Payments SET verified = $ok WHERE id = $paymentid", $link)
-	or mail_and_die('mysql_query UPDATE Payments error');
+	or mail_and_die('mysql_query UPDATE Payments error', __FILE__);
 
 if ($ok) {
 	mysql_query("UPDATE members.Users SET paid_verified = (SELECT submitted FROM members.Payments WHERE id = $paymentid) + INTERNAL $months MONTH WHERE email = $email2", $link)
-		or mail_and_die('mysql_query UPDATE Users error');
+		or mail_and_die('mysql_query UPDATE Users error', __FILE__);
 }
 else {
 	mysql_query("UPDATE members.Users SET paid = paid - INTERVAL $months MONTH WHERE email = $email2", $link)
-		or mail_and_die('mysql_query UPDATE Users error');
+		or mail_and_die('mysql_query UPDATE Users error', __FILE__);
 	//mailer($email, $subject, $body);
 }
 

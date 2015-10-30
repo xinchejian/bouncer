@@ -4,12 +4,6 @@
 
 require 'inc/mailer.php';
 
-function mail_and_die($m)
-{
-  mailer('it@xinchejian.com', 'Error in '.__FILE__, $m);
-  die($m);
-}
-
 
 $subject = 'Xinchejian membership reminder 新车间会员资格到期提醒';
 $body = 'Dear Xinchejian member,
@@ -29,7 +23,7 @@ Thanks for your continuous support!
 
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error');
+	or mail_and_die('mysql_connect error', __FILE__);
 
 $result = mysql_query('SELECT email FROM members.Users WHERE paid = CURDATE() OR paid_verified = CURDATE()', $link)
 	or die('mysql_query SELECT error');

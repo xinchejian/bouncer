@@ -45,6 +45,7 @@ function open_door()
         {
                 $fperr = $errstr;
 	        header('Location: dooroffline.html', true, 303);
-		mail_and_die('fsockopen returned: '.$fperr);
+                require_once 'mailer.php';
+		mail_and_die('The door is offline', 'fsockopen returned: '.$fperr);
         }
 }

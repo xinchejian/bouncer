@@ -2,17 +2,12 @@
 require 'inc/common.php';
 require 'inc/mailer.php';
 
-function mail_and_die($m)
-{
-  mailer('it@xinchejian.com', 'Error in '.__FILE__, $m);
-  die($m);
-}
 
 $password = $_POST['password'];
 
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error');
+	or mail_and_die('mysql_connect error', __FILE__);
 
 $password2 = '"'.mysql_real_escape_string($password, $link).'"';
 
@@ -24,7 +19,7 @@ else
 	$mac2 = '';
 
 mysql_query('UPDATE members.Users SET count = count + 1'.$mac2." WHERE CURDATE() <= paid AND password = $password2", $link)
-	or mail_and_die('mysql_query UPDATE error');
+	or mail_and_die('mysql_query UPDATE error', __FILE__);
 
 if (mysql_affected_rows($link) != 1)
 {

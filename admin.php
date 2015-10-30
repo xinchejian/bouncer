@@ -14,7 +14,7 @@ function verify(e, ok, id, email) {
       e.style.backgroundColor = ok ? "green" : "red";
     }
   };
-  xhr.send();  
+  xhr.send();
 }
 //-->
   </script>
@@ -35,10 +35,10 @@ require 'inc/mailer.php';
 
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
-	or mail_and_die('mysql_connect error');
+	or mail_and_die('mysql_connect error', __FILE__);
 
 $result = mysql_query("SELECT id,email,CAST(submitted AS DATE) as submitted,amount FROM members.Payments WHERE verified IS NULL;", $link)
-	or die('mysql_query SELECT error');
+	or mail_and_die('mysql_query SELECT error', __FILE__);
 
 while ($row = mysql_fetch_assoc($result)) {?>
    <tr>
