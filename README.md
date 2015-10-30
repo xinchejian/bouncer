@@ -15,7 +15,7 @@ There are three entry points:
 1. Get email with code for door
 
 ## SQL
-The MySQL DB schema create script can be found in `db.sql`.
+The SQLite DB schema create script can be found in `db.sql`.
 
 ## To-Do
 * Cronjob for membership reminders DONE: `checkpaid.php`
