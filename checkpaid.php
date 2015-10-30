@@ -2,7 +2,7 @@
 // Add this to a daily cronjob using curl or somesuch:
 // 0 6 * * * /usr/bin/curl http://localhost/checkpaid.php
 
-require('inc/mailer.php');
+require 'inc/mailer.php';
 
 function mail_and_die($m)
 {

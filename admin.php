@@ -1,4 +1,4 @@
-<?php require('inc/common.php');?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>XCJ payment verification</title>
@@ -31,6 +31,7 @@ function verify(e, ok, id, email) {
    </tr>
   </thead>
   <tbody><?php
+require 'inc/common.php';
 
 // add SetEnv MYSQL_PASSWORD "blah" to this site's Apache conf
 $link = mysql_connect('localhost', 'webuser', getenv('MYSQL_PASSWORD'))
