@@ -5,7 +5,7 @@ require 'inc/db.php';
 
 
 $password = $_POST['password'];
-$password2 = '"'.mysql_real_escape_string($password, $link).'"';
+$password2 = '"'.$link->escapeString($password).'"';
 
 // Register MAC address
 $mac = find_mac();
@@ -14,10 +14,10 @@ if ($mac)
 else
 	$mac2 = '';
 
-mysql_query('UPDATE members.Users SET count = count + 1'.$mac2." WHERE CURDATE() <= paid AND password = $password2", $link)
-	or mail_and_die('mysql_query UPDATE error', __FILE__);
+$link->exec('UPDATE members.Users SET count = count + 1'.$mac2." WHERE CURDATE() <= paid AND password = $password2")
+	or mail_and_die('link->exec UPDATE error', __FILE__);
 
-if (mysql_affected_rows($link) != 1)
+if ($link->changes() != 1)
 {
 	header('Location: accessdenied.html', true, 303);
 }
@@ -25,6 +25,6 @@ else
 {
 	open_door();
 }
-mysql_close($link);
+$link->close();
 unset($link);
 

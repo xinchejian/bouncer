@@ -22,13 +22,13 @@ Thanks for your continuous support!
 
 -- the script that sends out these emails';
 
-$result = mysql_query('SELECT email FROM members.Users WHERE paid = CURDATE() OR paid_verified = CURDATE()', $link)
-	or die('mysql_query SELECT error');
+$result = $link->exec('SELECT email FROM members.Users WHERE paid = CURDATE() OR paid_verified = CURDATE()')
+	or die('link->exec SELECT error');
 
 while ($row = mysql_fetch_assoc($result)) {
 	mailer($row['email'], $subject, $body);
 }
 
-mysql_close($link);
+$link->close();
 unset($link);
 

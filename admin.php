@@ -34,8 +34,8 @@ function verify(e, ok, id, email) {
 require 'inc/mailer.php';
 require 'inc/db.php';
 
-$result = mysql_query("SELECT id,email,CAST(submitted AS DATE) as submitted,amount FROM members.Payments WHERE verified IS NULL;", $link)
-	or mail_and_die('mysql_query SELECT error', __FILE__);
+$result = $link->exec("SELECT id,email,CAST(submitted AS DATE) as submitted,amount FROM members.Payments WHERE verified IS NULL;")
+	or mail_and_die('link->exec SELECT error', __FILE__);
 
 while ($row = mysql_fetch_assoc($result)) {?>
    <tr>
@@ -49,7 +49,7 @@ while ($row = mysql_fetch_assoc($result)) {?>
    </tr><?php
 }
 
-mysql_close($link);
+$link->close();
 unset($link);
 ?></tbody>
  </table>
