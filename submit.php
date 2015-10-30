@@ -37,11 +37,11 @@ $amount2 = '"'.$link->escapeString($amount).'"';
 $password2 = '"'.$link->escapeString($password).'"';
 $salt2 = '"'.$link->escapeString($salt).'"';
 
-$link->exec("INSERT IGNORE Users (email,since) VALUES($email2,NOW())")
+$link->exec("INSERT OR IGNORE INTO Users (email,since) VALUES($email2,NOW())")
 	or mail_and_die('link->exec INSERT Users error', __FILE__);
 $isnew = $link->changes() == 1;
 
-$link->exec("INSERT Payments (email, submitted, amount) VALUES($email2, NOW(), $amount2)")
+$link->exec("INSERT INTO Payments (email, submitted, amount) VALUES($email2, NOW(), $amount2)")
 	or mail_and_die('link->exec INSERT Payments error', __FILE__);
 
 // Give new members the benefit of the doubt (trust, but verify):
