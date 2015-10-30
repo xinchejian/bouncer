@@ -10,7 +10,7 @@ $password2 = '"'.mysql_real_escape_string($password, $link).'"';
 // Register MAC address
 $mac = find_mac();
 if ($mac)
-	$mac2 = ', mac = SHA1(CONCAT("salT","'.mysql_real_escape_string($mac, $link).'"))';
+	$mac2 = ', mac = "'.sha1('salT'.$mac).'"';
 else
 	$mac2 = '';
 
