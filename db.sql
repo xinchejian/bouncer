@@ -1,7 +1,7 @@
 CREATE DATABASE `members`;
 USE `members`;
 
-CREATE TABLE `members`.`Payments` (
+CREATE TABLE `Payments` (
   `id` integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   `email` char(64) NOT NULL,
   `submitted` datetime NOT NULL,
