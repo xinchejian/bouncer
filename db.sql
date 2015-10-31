@@ -15,7 +15,7 @@ CREATE TABLE `Users` (
   `email` char(64) NOT NULL,
   `password` char(32) NULL,
   `salt` char(32) NULL,
-  `last_update` timestamp NOT NULL,
+  `last_update` timestamp DEFAULT CURRENT_TIMESTAMP,
   `paid_verified` date DEFAULT NULL,
   `paid` date DEFAULT NULL,
   `since` date NOT NULL,
