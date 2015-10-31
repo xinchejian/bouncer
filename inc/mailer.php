@@ -37,5 +37,5 @@ function mailer($mail_to, $subject, $body)
 function mail_and_die($subject, $body)
 {
   mailer('it@xinchejian.com', $subject, $body);
-  die($subject.'\n'.$body);
+  die($subject."\n".$body);
 }
