@@ -37,16 +37,14 @@ function open_door()
 	        	$res = fgets ($fp, 1024);
         	fclose($fp);
 
-        	header('HTTP/1.1 303 See Other');
-	        header('Location: welcomeback.html');
+	        header('Location: welcomeback.html', true, 303);
 
         	exec('/usr/bin/ssh -i /var/rpc_id_rsa root@10.0.10.5 ./add_mac.sh '.$mac);
         }
         else
         {
                 $fperr = $errstr;
-        	header('HTTP/1.1 303 See Other');
-	        header('Location: dooroffline.html');
+	        header('Location: dooroffline.html', true, 303);
 		mail_and_die('fsockopen returned: '.$fperr);
         }
 }
