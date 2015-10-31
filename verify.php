@@ -33,7 +33,7 @@ if ($ok) {
 		or mail_and_die('link->exec UPDATE Users error', __FILE__);
 }
 else {
-	$link->exec("UPDATE Users SET paid = paid - INTERVAL $months MONTH WHERE email = '$email2'")
+	$link->exec("UPDATE Users SET paid = DATE(paid, '-$months MONTH') WHERE email = '$email2'")
 		or mail_and_die('link->exec UPDATE Users error', __FILE__);
 	//mailer($email, $subject, $body);
 }

@@ -10,7 +10,7 @@ $password2 = $link->escapeString($password);
 // Register MAC address
 $mac = find_mac();
 if ($mac)
-	$mac2 = ', mac = "'.sha1('salT'.$mac).'"';
+	$mac2 = ", mac = '".sha1('salT'.$mac)."'";
 else
 	$mac2 = '';
 
