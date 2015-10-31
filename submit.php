@@ -46,7 +46,7 @@ $link->exec("INSERT INTO Payments (email, submitted, amount) VALUES($email2, DAT
 
 // Give new members the benefit of the doubt (trust, but verify):
 // FIXME: might fail because of unique password (change salt)
-$link->exec("UPDATE Users SET paid = DATE(MAX(paid, DATE('now')),'+$months MONTH'), salt = $salt2, password = $password2 WHERE email = $email2")
+$link->exec("UPDATE Users SET paid = DATE(MAX(IFNULL(paid,0), DATE('now')),'+$months MONTH'), salt = $salt2, password = $password2 WHERE email = $email2")
 	or mail_and_die('link->exec UPDATE error', __FILE__);
 if ($link->changes() != 1)
 	mail_and_die('link->changes should be 1', __FILE__);
