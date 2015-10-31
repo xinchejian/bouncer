@@ -14,8 +14,8 @@ CREATE TABLE `Payments` (
 CREATE TABLE `Users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` char(64) NOT NULL,
-  `password` char(32) NOT NULL,
-  `salt` char(32) NOT NULL,
+  `password` char(32) NULL,
+  `salt` char(32) NULL,
   `last_update` timestamp NOT NULL,
   `paid_verified` date DEFAULT NULL,
   `paid` date DEFAULT NULL,
