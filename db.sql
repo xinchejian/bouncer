@@ -25,3 +25,11 @@ CREATE TABLE `Users` (
 CREATE UNIQUE INDEX `IDX_Users_EMAIL` ON `Users`(`email`);
 CREATE UNIQUE INDEX `IDX_Users_PASSWORD` ON `Users`(`password`);
 CREATE UNIQUE INDEX `IDX_Users_MAC` ON `Users`(`mac`);
+
+CREATE TRIGGER [UpdateLastTime]
+  AFTER UPDATE
+  ON Users
+  FOR EACH ROW
+  BEGIN
+    UPDATE Users SET last_update = CURRENT_TIMESTAMP WHERE id = old.id;
+  END
