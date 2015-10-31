@@ -23,3 +23,6 @@ The SQLite DB schema create script can be found in `db.sql`.
 * Cronjob for DB backups
 * Push-to-deploy DONE: see comment in https://github.com/xinchejian/bouncer/issues/37
 
+## Prerequisites
+* libapache2-mod-php5
+* php5-sqlite
