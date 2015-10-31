@@ -1,6 +1,6 @@
 <?php
-require('inc/common.php');
-require('inc/mailer.php');
+require 'inc/common.php';
+require 'inc/mailer.php';
 
 function mail_and_die($m)
 {
@@ -28,7 +28,7 @@ if (mysql_affected_rows($link) == 1)
 }
 else {
 	header('HTTP/1.1 303 See Other');
-	header("Location: /index.html");
+	header('Location: index.html');
 }
 mysql_close($link);
 unset($link);

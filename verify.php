@@ -1,6 +1,6 @@
 <?php
-require('inc/common.php');
-require('inc/mailer.php');
+require 'inc/common.php';
+require 'inc/mailer.php';
 
 $paymentid = (int)$_GET['id'];
 $ok = (int)$_GET['ok'];
