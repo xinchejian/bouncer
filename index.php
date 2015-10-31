@@ -28,7 +28,7 @@ if (mysql_affected_rows($link) == 1)
 }
 else {
 	header('HTTP/1.1 303 See Other');
-	header("Location: /index.html");
+	header('Location: index.html');
 }
 mysql_close($link);
 unset($link);

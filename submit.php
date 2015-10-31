@@ -11,7 +11,7 @@ function mail_and_die($m)
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	header('HTTP/1.1 303 See Other');
-	header('Location: /submit.html');
+	header('Location: submit.html');
 	die('must be POST');
 }
 
@@ -80,5 +80,5 @@ else
 mailer('finances@xinchejian.com', "$neworold member: $email, paid $amount for $months month(s).", '-- '.__FILE__);
 
 header('HTTP/1.1 303 See Other');
-header('Location: /welcome.html');
+header('Location: welcome.html');
 

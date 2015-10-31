@@ -38,7 +38,7 @@ function open_door()
         	fclose($fp);
 
         	header('HTTP/1.1 303 See Other');
-	        header("Location: /welcomeback.html");
+	        header('Location: welcomeback.html');
 
         	exec('/usr/bin/ssh -i /var/rpc_id_rsa root@10.0.10.5 ./add_mac.sh '.$mac);
         }
@@ -46,7 +46,7 @@ function open_door()
         {
                 $fperr = $errstr;
         	header('HTTP/1.1 303 See Other');
-	        header("Location: /dooroffline.html");
+	        header('Location: dooroffline.html');
 		mail_and_die('fsockopen returned: '.$fperr);
         }
 }
