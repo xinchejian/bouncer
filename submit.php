@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 
-$amount = $_POST['amount'];
+$amount = (int)$_POST['amount'];
 $email = trim($_POST['email']);
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 	mail_and_die('invalid email', __FILE__);
@@ -32,26 +32,25 @@ $password = sprintf("%06u", $crc % 1000000);
 
 require 'inc/db.php';
 
-$email2 = '"'.mysql_real_escape_string($email, $link).'"';
-$amount2 = '"'.mysql_real_escape_string($amount, $link).'"';
-$password2 = '"'.mysql_real_escape_string($password, $link).'"';
-$salt2 = '"'.mysql_real_escape_string($salt, $link).'"';
+$email2 = $link->escapeString($email);
+$password2 = $link->escapeString($password);
+$salt2 = $link->escapeString($salt);
 
-mysql_query("INSERT IGNORE members.Users (email,since) VALUES($email2,NOW())", $link)
-	or mail_and_die('mysql_query INSERT Users error', __FILE__);
-$isnew = mysql_affected_rows($link) == 1;
+$link->exec("INSERT OR IGNORE INTO Users (email,since) VALUES('$email2',DATETIME('now'))")
+	or mail_and_die('link->exec INSERT Users error', __FILE__);
+$isnew = $link->changes() == 1;
 
-mysql_query("INSERT members.Payments (email, submitted, amount) VALUES($email2, NOW(), $amount2)", $link)
-	or mail_and_die('mysql_query INSERT Payments error', __FILE__);
+$link->exec("INSERT INTO Payments (email, submitted, amount) VALUES('$email2', DATETIME('now'), $amount)")
+	or mail_and_die('link->exec INSERT Payments error', __FILE__);
 
 // Give new members the benefit of the doubt (trust, but verify):
 // FIXME: might fail because of unique password (change salt)
-mysql_query("UPDATE members.Users SET paid = IF(CURDATE()<paid,paid,CURDATE()) + INTERVAL $months MONTH, salt = $salt2, password = $password2 WHERE email = $email2", $link)
-	or mail_and_die('mysql_query UPDATE error', __FILE__);
-if (mysql_affected_rows($link) != 1)
-	mail_and_die('mysql_affected_rows != 1', __FILE__);
+$link->exec("UPDATE Users SET paid = DATE(MAX(IFNULL(paid,0), DATE('now')),'+$months MONTH'), salt = '$salt2', password = '$password2' WHERE email = '$email2'")
+	or mail_and_die('link->exec UPDATE error', __FILE__);
+if ($link->changes() != 1)
+	mail_and_die('link->changes should be 1', __FILE__);
 
-mysql_close($link);
+$link->close();
 unset($link);
 
 $subject = 'Welcome to Xinchejian 欢迎加入新车间';

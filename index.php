@@ -6,20 +6,20 @@ require 'inc/db.php';
 // Find known MAC address
 $mac = find_mac();
 if ($mac)
-	$mac2 = '"'.mysql_real_escape_string($mac, $link).'"';
+	$mac2 = sha1('salT'.$mac);
 else
-	$mac2 = '"whatever"';
+	$mac2 = 'whatever';
 
-mysql_query("UPDATE members.Users SET count = count + 1 WHERE CURDATE() <= paid AND mac = SHA1(CONCAT('salT',$mac2))", $link)
-	or mail_and_die('mysql_query UPDATE error', __FILE__);
+$link->exec("UPDATE Users SET count = count + 1 WHERE DATE('now') <= paid AND mac = '$mac2'")
+	or mail_and_die('link->exec UPDATE error', __FILE__);
 
-if (mysql_affected_rows($link) == 1)
+if ($link->changes() == 1)
 {
 	open_door();
 }
 else {
 	header('Location: index.html', true, 303);
 }
-mysql_close($link);
+$link->close();
 unset($link);
 

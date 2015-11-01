@@ -7,12 +7,12 @@ $paymentid = (int)$_GET['id'];
 $ok = (int)$_GET['ok'];
 $email = urldecode($_GET['email']);
 
-$email2 = '"'.mysql_real_escape_string($email, $link).'"';
+$email2 = $link->escapeString($email);
 
-$result = mysql_query("SELECT email,amount FROM members.Payments WHERE id = $paymentid;", $link)
-	or die('mysql_query SELECT error');
+$result = $link->query("SELECT email,amount FROM Payments WHERE id = $paymentid;")
+	or die('link->query SELECT error');
 
-if ($row = mysql_fetch_assoc($result))
+if ($row = $result->fetchArray())
 	$amount = $row['amount'];
 if ($amount == '100')
 	$months = 1;
@@ -25,18 +25,18 @@ else if ($amount == '5000')
 else
 	mail_and_die('wrong amount', __FILE__);
 
-mysql_query("UPDATE members.Payments SET verified = $ok WHERE id = $paymentid", $link)
-	or mail_and_die('mysql_query UPDATE Payments error', __FILE__);
+$link->exec("UPDATE Payments SET verified = $ok WHERE id = $paymentid")
+	or mail_and_die('link->exec UPDATE Payments error', __FILE__);
 
 if ($ok) {
-	mysql_query("UPDATE members.Users SET paid_verified = (SELECT submitted FROM members.Payments WHERE id = $paymentid) + INTERNAL $months MONTH WHERE email = $email2", $link)
-		or mail_and_die('mysql_query UPDATE Users error', __FILE__);
+	$link->exec("UPDATE Users SET paid_verified = (SELECT submitted FROM Payments WHERE id = $paymentid) + INTERNAL $months MONTH WHERE email = '$email2'")
+		or mail_and_die('link->exec UPDATE Users error', __FILE__);
 }
 else {
-	mysql_query("UPDATE members.Users SET paid = paid - INTERVAL $months MONTH WHERE email = $email2", $link)
-		or mail_and_die('mysql_query UPDATE Users error', __FILE__);
+	$link->exec("UPDATE Users SET paid = DATE(paid, '-$months MONTH') WHERE email = '$email2'")
+		or mail_and_die('link->exec UPDATE Users error', __FILE__);
 	//mailer($email, $subject, $body);
 }
 
-mysql_close($link);
+$link->close();
 unset($link);
